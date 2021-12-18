@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 }
 
 class MyApp extends StatelessWidget {
