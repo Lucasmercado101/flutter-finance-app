@@ -9,12 +9,39 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Page"),
-      ),
-      body: Center(
-        child: Text("Home Page"),
-      ),
+      body: Column(children: [
+        Container(
+          child: Row(
+            children: [
+              Container(
+                child: Text(
+                  "Home",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                child: Text(
+                  "Profile",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                child: Text(
+                  "Notification",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                child: Text(
+                  "Setting",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Text("Home Page"),
+      ]),
     );
   }
 }
