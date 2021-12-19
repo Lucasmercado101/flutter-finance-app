@@ -6,41 +6,84 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var money = 1000;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
+        AppBar(
+          title: Text("Home"),
+        ),
         Container(
+          padding: const EdgeInsets.all(20),
           child: Row(
             children: [
-              Container(
-                child: Text(
-                  "Home",
-                  style: TextStyle(fontSize: 20),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(7),
+                    ),
+                    color: Colors.green[500],
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Income",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "\$" + money.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ]),
                 ),
               ),
-              Container(
-                child: Text(
-                  "Profile",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Container(
-                child: Text(
-                  "Notification",
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Container(
-                child: Text(
-                  "Setting",
-                  style: TextStyle(fontSize: 20),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.horizontal(
+                      right: Radius.circular(7),
+                    ),
+                    color: Colors.red[500],
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Expenses",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "\$2,000",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ]),
                 ),
               ),
             ],
           ),
         ),
-        Text("Home Page"),
       ]),
     );
   }
