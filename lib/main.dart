@@ -1,4 +1,5 @@
 import 'package:finances/pages/home.dart';
+import 'package:finances/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
         // brightness: Brightness.dark,
       ),
       home: HomePage(),
+      initialRoute: "/",
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
