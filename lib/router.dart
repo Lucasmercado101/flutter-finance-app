@@ -1,10 +1,13 @@
-import 'package:finances/pages/addAmountPage.dart';
+import 'package:finances/pages/add_amount_page.dart';
 import 'package:finances/pages/home.dart';
+import "dart:core";
 import "package:flutter/material.dart";
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
+    Uri uri = Uri.parse(settings.name ?? "/");
+
+    switch (uri.path) {
       case "/":
         return MaterialPageRoute(builder: (_) => HomePage());
       case "/add":

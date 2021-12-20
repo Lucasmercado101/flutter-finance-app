@@ -6,6 +6,8 @@ class AddAmountPage extends StatefulWidget {
 }
 
 class _AddAmountPageState extends State<AddAmountPage> {
+  var amount = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,16 @@ class _AddAmountPageState extends State<AddAmountPage> {
         title: Text('Add Amount'),
       ),
       body: Center(
-        child: Text('Add Amount'),
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Enter Amount',
+          ),
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          onChanged: (value) {
+            amount = double.parse(value);
+          },
+        ),
       ),
     );
   }
