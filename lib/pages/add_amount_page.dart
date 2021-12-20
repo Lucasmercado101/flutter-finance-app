@@ -50,7 +50,7 @@ class _AddAmountPageState extends State<AddAmountPage> {
                 ),
               ],
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () => {}, child: const Text('Confirm')),
