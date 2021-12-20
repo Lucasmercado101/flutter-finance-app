@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:flutter/services.dart";
 
 class AddAmountPage extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class _AddAmountPageState extends State<AddAmountPage> {
           onChanged: (value) {
             amount = double.parse(value);
           },
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         ),
       ),
     );
