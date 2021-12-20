@@ -11,6 +11,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, "/add");
+        },
+      ),
       body: Column(children: [
         AppBar(
           title: Text("Home"),
@@ -84,12 +90,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
-              ElevatedButton(
-                child: Text("Add"),
-                onPressed: () {
-                  Navigator.pushNamed(context, "/add");
-                },
               ),
             ],
           ),
