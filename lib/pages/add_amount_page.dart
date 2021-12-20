@@ -11,6 +11,13 @@ class AddAmountPage extends StatefulWidget {
 
 class _AddAmountPageState extends State<AddAmountPage> {
   TransactionType _transactionType = TransactionType.Expense;
+  final _formKey = GlobalKey<FormState>();
+
+  submit() {
+    if (_formKey.currentState!.validate()) {
+      print("Form is valid");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,45 +26,47 @@ class _AddAmountPageState extends State<AddAmountPage> {
         title: const Text('Add Amount'),
       ),
       body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Enter Amount',
-              ),
-              keyboardType: TextInputType.number,
-              autofocus: true,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-            const SizedBox(height: 16.0),
-            DropdownButton<TransactionType>(
-              value: _transactionType,
-              isExpanded: true,
-              onChanged: (newValue) {
-                setState(() {
-                  _transactionType = newValue!;
-                });
-              },
-              items: const [
-                DropdownMenuItem(
-                  value: TransactionType.Expense,
-                  child: Text('Expense'),
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: 'Enter Amount',
+                  ),
+                  keyboardType: TextInputType.number,
+                  autofocus: true,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
-                DropdownMenuItem(
-                  value: TransactionType.Income,
-                  child: Text('Income'),
+                const SizedBox(height: 16.0),
+                DropdownButton<TransactionType>(
+                  value: _transactionType,
+                  isExpanded: true,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _transactionType = newValue!;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: TransactionType.Expense,
+                      child: Text('Expense'),
+                    ),
+                    DropdownMenuItem(
+                      value: TransactionType.Income,
+                      child: Text('Income'),
+                    ),
+                  ],
                 ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: submit, child: const Text('Confirm')),
+                )
               ],
             ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () => {}, child: const Text('Confirm')),
-            )
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
