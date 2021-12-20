@@ -30,7 +30,7 @@ class _AddAmountPageState extends State<AddAmountPage> {
               autofocus: true,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             DropdownButton<TransactionType>(
               value: _transactionType,
               isExpanded: true,
@@ -50,6 +50,11 @@ class _AddAmountPageState extends State<AddAmountPage> {
                 ),
               ],
             ),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                  onPressed: () => {}, child: const Text('Confirm')),
+            )
           ],
         ),
       ),
