@@ -1,3 +1,4 @@
+import 'package:finances/models/transaction.dart';
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
 
@@ -9,6 +10,8 @@ class AddAmountPage extends StatefulWidget {
 }
 
 class _AddAmountPageState extends State<AddAmountPage> {
+  TransactionType _transactionType = TransactionType.Expense;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +29,26 @@ class _AddAmountPageState extends State<AddAmountPage> {
               keyboardType: TextInputType.number,
               autofocus: true,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            ),
+            SizedBox(height: 16.0),
+            DropdownButton<TransactionType>(
+              value: _transactionType,
+              isExpanded: true,
+              onChanged: (newValue) {
+                setState(() {
+                  _transactionType = newValue!;
+                });
+              },
+              items: const [
+                DropdownMenuItem(
+                  value: TransactionType.Expense,
+                  child: Text('Expense'),
+                ),
+                DropdownMenuItem(
+                  value: TransactionType.Income,
+                  child: Text('Income'),
+                ),
+              ],
             ),
           ],
         ),
