@@ -54,10 +54,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       title: Text(
                         (item.type == TransactionType.Expense ? "-" : "+") +
-                            item.amount.toString(),
+                            NumberFormat.currency(symbol: "").format(
+                              item.amount,
+                            ),
                         style: const TextStyle(
-                          fontSize: 20,
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                       subtitle:
                           Text(formatDate(item.date.millisecondsSinceEpoch)),
