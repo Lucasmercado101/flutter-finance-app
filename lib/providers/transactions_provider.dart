@@ -46,4 +46,10 @@ class TransactionsProvider with ChangeNotifier {
     _storage.writeTransactions(_items);
     notifyListeners();
   }
+
+  delete(String id) {
+    _items.removeWhere((item) => item.id == id);
+    _storage.writeTransactions(_items);
+    notifyListeners();
+  }
 }
