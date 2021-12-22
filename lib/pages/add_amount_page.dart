@@ -25,7 +25,7 @@ class _AddAmountPageState extends State<AddAmountPage> {
       if (_formKey.currentState!.validate()) {
         transactions.addTransaction(
           Transaction(
-            double.parse(amount),
+            int.parse(amount),
             DateTime.now(),
             _transactionType,
           ),

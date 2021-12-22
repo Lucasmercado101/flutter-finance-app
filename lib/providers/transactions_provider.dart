@@ -6,8 +6,8 @@ class TransactionsProvider with ChangeNotifier {
 
   List<Transaction> get items => _items;
 
-  double get totalExpenses {
-    return _items.fold(0.0, (sum, item) {
+  int get totalExpenses {
+    return _items.fold(0, (sum, item) {
       if (item.type == TransactionType.Expense) {
         return sum + item.amount;
       } else {
@@ -16,8 +16,8 @@ class TransactionsProvider with ChangeNotifier {
     });
   }
 
-  double get totalIncome {
-    return _items.fold(0.0, (sum, item) {
+  int get totalIncome {
+    return _items.fold(0, (sum, item) {
       if (item.type == TransactionType.Income) {
         return sum + item.amount;
       } else {
@@ -26,7 +26,7 @@ class TransactionsProvider with ChangeNotifier {
     });
   }
 
-  double get total {
+  int get total {
     return totalIncome - totalExpenses;
   }
 

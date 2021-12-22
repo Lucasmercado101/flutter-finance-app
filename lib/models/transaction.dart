@@ -9,7 +9,7 @@ enum TransactionType {
 
 class Transaction {
   final Uuid id = const Uuid();
-  final double amount;
+  final int amount;
   final DateTime date;
   final TransactionType type;
 

@@ -6,20 +6,24 @@ const thousand = 1000;
 const million = 1000000;
 const billion = 1000000000;
 const trillion = 1000000000000;
+const quadrillion = 1000000000000000;
+const quintillion = 1000000000000000000;
 
-String formatCurrency(double value) {
-  if (value == 0) {
-    return "0";
-  } else if (value > trillion) {
-    return '${(value / trillion).toStringAsFixed(1)}T';
-  } else if (value > billion) {
-    return '${(value / billion).toStringAsFixed(1)}B';
-  } else if (value > million) {
-    return '${(value / million).toStringAsFixed(1)}M';
-  } else if (value > thousand) {
-    return '${(value / thousand).toStringAsFixed(1)}K';
+String formatCurrency(int value) {
+  if (value >= quintillion) {
+    return '${(value / quintillion).toStringAsFixed(2)}Q';
+  } else if (value >= quadrillion) {
+    return '${(value / quadrillion).toStringAsFixed(2)}q';
+  } else if (value >= trillion) {
+    return '${(value / trillion).toStringAsFixed(0)}t';
+  } else if (value >= billion) {
+    return '${(value / billion).toStringAsFixed(0)}B';
+  } else if (value >= million) {
+    return '${(value / million).toStringAsFixed(0)}M';
+  } else if (value >= thousand) {
+    return '${(value / thousand).toStringAsFixed(0)}K';
   } else {
-    return value.toStringAsFixed(2);
+    return value.toString();
   }
 }
 
