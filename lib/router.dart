@@ -1,5 +1,5 @@
 import 'package:finances/pages/add_amount_page.dart';
-import 'package:finances/pages/home.dart';
+import 'package:finances/pages/home/home.dart';
 import "dart:core";
 import "package:flutter/material.dart";
 
