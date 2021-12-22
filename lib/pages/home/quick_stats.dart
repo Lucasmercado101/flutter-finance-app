@@ -8,7 +8,6 @@ const billion = 1000000000;
 const trillion = 1000000000000;
 
 String formatCurrency(double value) {
-  print(value);
   if (value == 0) {
     return "0";
   } else if (value > trillion) {
