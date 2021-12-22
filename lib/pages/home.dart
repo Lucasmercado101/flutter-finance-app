@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Home"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             QuickStats(),
