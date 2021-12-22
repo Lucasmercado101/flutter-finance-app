@@ -1,6 +1,8 @@
 import 'package:finances/models/transaction.dart';
+import 'package:finances/providers/transactions_provider.dart';
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
+import 'package:provider/provider.dart';
 
 class AddAmountPage extends StatefulWidget {
   const AddAmountPage({Key? key}) : super(key: key);
@@ -13,14 +15,24 @@ class _AddAmountPageState extends State<AddAmountPage> {
   TransactionType _transactionType = TransactionType.Expense;
   final _formKey = GlobalKey<FormState>();
 
-  submit() {
-    if (_formKey.currentState!.validate()) {
-      print("Form is valid");
-    }
-  }
+  var amount = "";
 
   @override
   Widget build(BuildContext context) {
+    final transactions = Provider.of<TransactionsProvider>(context);
+
+    submit() {
+      if (_formKey.currentState!.validate()) {
+        transactions.addTransaction(
+          Transaction(
+            double.parse(amount),
+            DateTime.now(),
+            _transactionType,
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Amount'),
@@ -38,6 +50,9 @@ class _AddAmountPageState extends State<AddAmountPage> {
                   keyboardType: TextInputType.number,
                   autofocus: true,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onChanged: (value) {
+                    amount = value;
+                  },
                 ),
                 const SizedBox(height: 16.0),
                 DropdownButton<TransactionType>(

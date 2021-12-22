@@ -1,13 +1,17 @@
+import 'package:uuid/uuid.dart';
+
+import 'package:uuid/uuid.dart';
+
 enum TransactionType {
   Income,
   Expense,
 }
 
 class Transaction {
-  final int id;
-  final int amount;
-  final String date;
+  final Uuid id = const Uuid();
+  final double amount;
+  final DateTime date;
   final TransactionType type;
 
-  Transaction(this.id, this.amount, this.date, this.type);
+  Transaction(this.amount, this.date, this.type);
 }
