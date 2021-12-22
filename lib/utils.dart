@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
+
 const thousand = 1000;
 const million = 1000000;
 const billion = 1000000000;
