@@ -26,6 +26,10 @@ class TransactionsProvider with ChangeNotifier {
     });
   }
 
+  double get total {
+    return totalIcome - totalExpenses;
+  }
+
   void addTransaction(Transaction transaction) {
     _items.add(transaction);
     notifyListeners();
