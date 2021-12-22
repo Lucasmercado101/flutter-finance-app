@@ -1,4 +1,5 @@
 import 'package:finances/models/transaction.dart';
+import 'package:finances/pages/home/quick_stats.dart';
 import 'package:finances/providers/transactions_provider.dart';
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
@@ -27,78 +28,13 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text("Home"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(7),
-                      ),
-                      color: Colors.green[500],
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Income",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "\$" + transactions.totalIcome.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                            ),
-                          ),
-                        ]),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.horizontal(
-                        right: Radius.circular(7),
-                      ),
-                      color: Colors.red[500],
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Expenses",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "\$" + transactions.totalExpenses.toString(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                            ),
-                          ),
-                        ]),
-                  ),
-                ),
-              ],
-            ),
+            QuickStats(),
             const SizedBox(height: 15),
             Expanded(
               child: ListView.builder(
