@@ -16,7 +16,7 @@ class TransactionsProvider with ChangeNotifier {
     });
   }
 
-  double get totalIcome {
+  double get totalIncome {
     return _items.fold(0.0, (sum, item) {
       if (item.type == TransactionType.Income) {
         return sum + item.amount;
@@ -27,7 +27,7 @@ class TransactionsProvider with ChangeNotifier {
   }
 
   double get total {
-    return totalIcome - totalExpenses;
+    return totalIncome - totalExpenses;
   }
 
   void addTransaction(Transaction transaction) {
