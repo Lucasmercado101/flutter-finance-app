@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            QuickStats(),
+            const QuickStats(),
             const SizedBox(height: 15),
             Expanded(
               child: ListView.builder(
