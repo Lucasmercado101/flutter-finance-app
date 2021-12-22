@@ -3,7 +3,17 @@ import 'package:finances/transactionsStorage.dart';
 import 'package:flutter/cupertino.dart';
 
 class TransactionsProvider with ChangeNotifier {
-  final List<Transaction> _items = [];
+  List<Transaction> _items = [];
+  final TransactionsStorage _storage = TransactionsStorage();
+
+  TransactionsProvider() {
+    _getData();
+  }
+
+  _getData() async {
+    _items = await _storage.readTransactions();
+    notifyListeners();
+  }
 
   List<Transaction> get items => _items;
 
@@ -33,6 +43,7 @@ class TransactionsProvider with ChangeNotifier {
 
   void addTransaction(Transaction transaction) {
     _items.add(transaction);
+    _storage.writeTransactions(_items);
     notifyListeners();
   }
 }
