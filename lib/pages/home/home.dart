@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sticky_headers/sticky_headers/widget.dart';
 
 String formatDate(int milliseconds) {
   final template = DateFormat('yyyy-MM-dd');
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     var transactions = Provider.of<TransactionsProvider>(context);
 
     // sort transactions.items by .date, and group them by month and day
-    Map<DateTime, List<Transaction>> sortedTransactions =
+    final Map<DateTime, List<Transaction>> sortedTransactions =
         transactions.items.fold(
       <DateTime, List<Transaction>>{},
       (Map<DateTime, List<Transaction>> accumulator, Transaction transaction) {
@@ -103,44 +104,63 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 15),
             Expanded(
               child: ListView.builder(
-                itemCount: transactions.items.length,
+                itemCount: sortedTransactions.length,
                 itemBuilder: (context, index) {
-                  var item = transactions.items[index];
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(
-                        item.type == TransactionType.Expense
-                            ? Icons.trending_down
-                            : Icons.trending_up,
-                        color: item.type == TransactionType.Income
-                            ? Colors.green[500]
-                            : Colors.red[500],
-                        size: 38,
-                      ),
-                      title: Text(
-                        (item.type == TransactionType.Expense ? "-" : "+") +
-                            NumberFormat.currency(symbol: "").format(
-                              item.amount,
+                  var transactionsList =
+                      sortedTransactions.entries.toList()[index];
+
+                  return StickyHeader(
+                    header: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                        child: Text(formatDate(
+                            transactionsList.key.millisecondsSinceEpoch))),
+                    content: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: transactionsList.value.length,
+                      itemBuilder: (context, index) {
+                        final el = transactionsList.value[index];
+
+                        return Card(
+                          child: ListTile(
+                            leading: Icon(
+                              el.type == TransactionType.Expense
+                                  ? Icons.trending_down
+                                  : Icons.trending_up,
+                              color: el.type == TransactionType.Income
+                                  ? Colors.green[500]
+                                  : Colors.red[500],
+                              size: 38,
                             ),
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                      subtitle:
-                          Text(formatDate(item.date.millisecondsSinceEpoch)),
-                      trailing: PopupMenuButton<String>(
-                        icon: Icon(Icons.more_vert),
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            value: "delete",
-                            child: const Text("Delete"),
-                            onTap: () => transactions.delete(item.id),
+                            title: Text(
+                              (el.type == TransactionType.Expense ? "-" : "+") +
+                                  NumberFormat.currency(symbol: "").format(
+                                    el.amount,
+                                  ),
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                            trailing: PopupMenuButton<String>(
+                              icon: Icon(Icons.more_vert),
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  value: "delete",
+                                  child: const Text("Delete"),
+                                  onTap: () => transactions.delete(el.id),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                          color: el.type == TransactionType.Income
+                              ? Colors.green[100]
+                              : Colors.red[100],
+                        );
+                      },
                     ),
-                    color: item.type == TransactionType.Income
-                        ? Colors.green[100]
-                        : Colors.red[100],
                   );
                 },
                 scrollDirection: Axis.vertical,
