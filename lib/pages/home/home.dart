@@ -113,12 +113,6 @@ class _HomePageState extends State<HomePage> {
                       trailing: PopupMenuButton<String>(
                         icon: Icon(Icons.more_vert),
                         itemBuilder: (context) => [
-                          /*
-                          PopupMenuItem(
-                            value: "edit",
-                            child: const Text("Edit"),
-                          ), 
-                          */
                           PopupMenuItem(
                             value: "delete",
                             child: const Text("Delete"),
