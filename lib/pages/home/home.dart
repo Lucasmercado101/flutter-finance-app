@@ -130,33 +130,44 @@ class _HomePageState extends State<HomePage> {
                         final el = transactionsList.value[index];
 
                         return Card(
-                          child: ListTile(
-                            leading: Icon(
-                              el.type == TransactionType.Expense
-                                  ? Icons.trending_down
-                                  : Icons.trending_up,
-                              color: el.type == TransactionType.Income
-                                  ? Colors.green[500]
-                                  : Colors.red[500],
-                              size: 38,
-                            ),
-                            title: Text(
-                              (el.type == TransactionType.Expense ? "-" : "+") +
-                                  NumberFormat.currency(symbol: "").format(
-                                    el.amount,
+                          child: PopupMenuButton(
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: "delete",
+                                child: const Text("Delete"),
+                                onTap: () => transactions.delete(el.id),
+                              ),
+                            ],
+                            child: ListTile(
+                              leading: Icon(
+                                el.type == TransactionType.Expense
+                                    ? Icons.trending_down
+                                    : Icons.trending_up,
+                                color: el.type == TransactionType.Income
+                                    ? Colors.green[500]
+                                    : Colors.red[500],
+                                size: 38,
+                              ),
+                              title: Text(
+                                (el.type == TransactionType.Expense
+                                        ? "-"
+                                        : "+") +
+                                    NumberFormat.currency(symbol: "").format(
+                                      el.amount,
+                                    ),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500),
+                              ),
+                              /* trailing: PopupMenuButton<String>(
+                                icon: Icon(Icons.more_vert),
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: "delete",
+                                    child: const Text("Delete"),
+                                    onTap: () => transactions.delete(el.id),
                                   ),
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            ),
-                            trailing: PopupMenuButton<String>(
-                              icon: Icon(Icons.more_vert),
-                              itemBuilder: (context) => [
-                                PopupMenuItem(
-                                  value: "delete",
-                                  child: const Text("Delete"),
-                                  onTap: () => transactions.delete(el.id),
-                                ),
-                              ],
+                                ],
+                              ),*/
                             ),
                           ),
                           color: el.type == TransactionType.Income
