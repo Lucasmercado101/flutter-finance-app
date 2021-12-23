@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:finances/models/transaction.dart';
 import 'package:finances/pages/home/quick_stats.dart';
 import 'package:finances/providers/transactions_provider.dart';
 import "package:flutter/material.dart";
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -55,14 +56,20 @@ class _HomePageState extends State<HomePage> {
                 // Update the state of the app.
                 // ...
                 if (Platform.isAndroid) {
-                  /*
                   Map<Permission, PermissionStatus> statuses = await [
                     Permission.storage,
                   ].request();
-                  print(statuses[Permission.storage]);
-                  */
-                  var file = await File("/sdcard/Download/text.txt")
-                      .writeAsString('some content');
+                  var status = statuses[Permission.storage];
+                  if (status == PermissionStatus.granted) {
+                    File("/sdcard/Download/finances_backup.json")
+                        .writeAsString(jsonEncode(transactions.items))
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                            "Backup created at /sdcard/Download/finances_backup.json"),
+                      ));
+                    });
+                  }
                 }
 
                 Navigator.pop(context);
