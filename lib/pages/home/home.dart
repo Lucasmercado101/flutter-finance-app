@@ -2,8 +2,11 @@ import 'package:finances/models/transaction.dart';
 import 'package:finances/pages/home/quick_stats.dart';
 import 'package:finances/providers/transactions_provider.dart';
 import "package:flutter/material.dart";
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
 
 String formatDate(int milliseconds) {
   final template = DateFormat('yyyy-MM-dd');
@@ -31,6 +34,42 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text("Home"),
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(''),
+            ),
+            ListTile(
+              title: const Text('Export'),
+              onTap: () async {
+                // Update the state of the app.
+                // ...
+                if (Platform.isAndroid) {
+                  /*
+                  Map<Permission, PermissionStatus> statuses = await [
+                    Permission.storage,
+                  ].request();
+                  print(statuses[Permission.storage]);
+                  */
+                  var file = await File("/sdcard/Download/text.txt")
+                      .writeAsString('some content');
+                }
+
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
