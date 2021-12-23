@@ -152,9 +152,11 @@ class _HomePageState extends State<HomePage> {
                                 (el.type == TransactionType.Expense
                                         ? "-"
                                         : "+") +
-                                    NumberFormat.currency(symbol: "").format(
-                                      el.amount,
-                                    ),
+                                    NumberFormat.currency(symbol: "")
+                                        .format(
+                                          el.amount,
+                                        )
+                                        .split(".")[0],
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
