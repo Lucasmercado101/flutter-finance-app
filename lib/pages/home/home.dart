@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     var transactions = Provider.of<TransactionsProvider>(context);
 
     // sort transactions.items by .date, and group them by month and day
-    final Map<DateTime, List<Transaction>> sortedTransactions =
+    final Map<DateTime, List<Transaction>> sortedByDateTransactions =
         transactions.items.fold(
       <DateTime, List<Transaction>>{},
       (Map<DateTime, List<Transaction>> accumulator, Transaction transaction) {
@@ -104,10 +104,14 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 15),
             Expanded(
               child: ListView.builder(
-                itemCount: sortedTransactions.length,
+                itemCount: sortedByDateTransactions.length,
                 itemBuilder: (context, index) {
                   var transactionsList =
-                      sortedTransactions.entries.toList()[index];
+                      sortedByDateTransactions.entries.toList()[index];
+
+                  // sort by date in descending order
+                  transactionsList.value
+                      .sort((a, b) => b.date.compareTo(a.date));
 
                   return StickyHeader(
                     header: Container(
