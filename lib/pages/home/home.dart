@@ -26,6 +26,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var transactions = Provider.of<TransactionsProvider>(context);
 
+    // sort transactions.items by .date, and group them by month and day
+    Map<DateTime, List<Transaction>> sortedTransactions =
+        transactions.items.fold(
+      <DateTime, List<Transaction>>{},
+      (Map<DateTime, List<Transaction>> accumulator, Transaction transaction) {
+        // Remove time from date
+        final key = DateTime(transaction.date.year, transaction.date.month,
+            transaction.date.day);
+        if (accumulator.containsKey(key)) {
+          accumulator[key]!.add(transaction);
+        } else {
+          accumulator[key] = [transaction];
+        }
+        return accumulator;
+      },
+    );
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
