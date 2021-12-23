@@ -1,6 +1,16 @@
+import 'dart:math';
+
 import 'package:finances/models/transaction.dart';
 import 'package:finances/transactionsStorage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+
+final List<Transaction> dummyTransactions = List.generate(30, (int index) {
+  return Transaction(
+    Random().nextInt(300000),
+    DateTime.now().subtract(Duration(hours: index * 4)),
+    index % 3 == 0 ? TransactionType.Expense : TransactionType.Income,
+  );
+});
 
 class TransactionsProvider with ChangeNotifier {
   List<Transaction> _items = [];
