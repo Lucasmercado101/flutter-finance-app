@@ -52,7 +52,7 @@ class TransactionsProvider with ChangeNotifier {
   }
 
   void addTransaction(Transaction transaction) {
-    _items.add(transaction);
+    _items.insert(0, transaction);
     _storage.writeTransactions(_items);
     notifyListeners();
   }
