@@ -71,8 +71,6 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: const Text('Export'),
               onTap: () async {
-                // Update the state of the app.
-                // ...
                 if (Platform.isAndroid) {
                   Map<Permission, PermissionStatus> statuses = await [
                     Permission.storage,
@@ -92,7 +90,13 @@ class _HomePageState extends State<HomePage> {
 
                 Navigator.pop(context);
               },
+              leading: const Icon(Icons.file_download),
             ),
+            ListTile(
+              title: const Text("Settings"),
+              onTap: () => Navigator.popAndPushNamed(context, "/settings"),
+              leading: const Icon(Icons.settings),
+            )
           ],
         ),
       ),
