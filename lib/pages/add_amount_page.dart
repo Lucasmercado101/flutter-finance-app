@@ -21,7 +21,7 @@ class _AddAmountPageState extends State<AddAmountPage> {
   Widget build(BuildContext context) {
     final transactions = Provider.of<TransactionsProvider>(context);
 
-    submit() {
+    void submit() {
       if (_formKey.currentState!.validate()) {
         transactions.addTransaction(
           Transaction(
@@ -31,6 +31,8 @@ class _AddAmountPageState extends State<AddAmountPage> {
           ),
         );
       }
+
+      Navigator.of(context).popAndPushNamed("/");
     }
 
     return Scaffold(
