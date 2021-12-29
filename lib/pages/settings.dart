@@ -1,4 +1,6 @@
+import 'package:finances/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -8,8 +10,13 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  var _darkTheme = false;
+
   @override
   Widget build(BuildContext context) {
+    final themeData = Provider.of<SettingsProvider>(context);
+    themeData.isDarkMode.then((value) => setState(() => _darkTheme = value));
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -20,8 +27,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ListTile(
               title: Text('Dark Mode'),
               trailing: Switch(
-                value: true,
-                onChanged: (bool value) {},
+                value: _darkTheme,
+                onChanged: (bool value) {
+                  setState(() => _darkTheme = value);
+                  themeData.setDarkMode(value);
+                },
               ),
             ),
           ],

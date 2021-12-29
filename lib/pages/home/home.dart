@@ -161,19 +161,15 @@ class _HomePageState extends State<HomePage> {
                                           el.amount,
                                         )
                                         .split(".")[0],
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    // contrasting color depending on theme
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.white
+                                        : Colors.black),
                               ),
-                              /* trailing: PopupMenuButton<String>(
-                                icon: Icon(Icons.more_vert),
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    value: "delete",
-                                    child: const Text("Delete"),
-                                    onTap: () => transactions.delete(el.id),
-                                  ),
-                                ],
-                              ),*/
                             ),
                           ),
                           color: el.type == TransactionType.Income
